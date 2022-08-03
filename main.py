@@ -138,7 +138,7 @@ async def ValidateSingOffChainVote(
     return { "result" : result }
 
 # Send offchain vote to CLH
-@app.get("{house_addr}/VotePropOffChain")
+@app.get("/{house_addr}/VotePropOffChain")
 async def VotePropOffChain(
     house_addr: str = Path(
         ...,
