@@ -1,11 +1,16 @@
-#Python
+# Python
 import web3
 import json
 import os
 
-#FastAPI
+# FastAPI
 from fastapi import FastAPI
 from fastapi import Query, Path
+from fastapi.middleware.cors import CORSMiddleware
+
+
+# Basic Configurations
+
 
 http_provider = os.environ[ 'URL_HTTP_PROVIDER' ]
 w3 = web3.Web3( web3.HTTPProvider( http_provider ) )
@@ -14,23 +19,49 @@ chainId = w3.eth.chain_id
 acc_key = os.environ[ 'ACC_PRIVATE_KEY' ]
 acc2paid = w3.eth.account.privateKeyToAccount( acc_key )
 
-# Load CLHouse ABI
+## Load CLHouse ABI
 abiCLH = open( './abis/CLHouse.json' )
 abiCLH = json.load( abiCLH )
 abiCLH = abiCLH[ 'abi' ]
 
-# Instance CLApi
+## Instance CLApi
 adrCLA = '0x7D42c58A8a9dE412Fc70fDA4688C493fa01ef60a'
 abiCLA = open( './abis/ApiCLHouse.json' )
 abiCLA = json.load( abiCLA )
 abiCLA = abiCLA[ "abi" ]
 CLA = w3.eth.contract( address=adrCLA, abi=abiCLA )
 
+
+# fastApi Config
+
+
 app = FastAPI()
 
+'''
+"*" is for testing purposes only
+For deployment, change it to the allowed website(s)
+'''
+origins = [
+    "*"
+]
+
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+)
+
+
+# endpoint configurations
+
+
+# Default call
 @app.get("/")
 async def root():
-    return { "message": "Contrat fastAPI" }
+    return { "message": "Contract fastAPI" }
+
 
 # Return the house name
 @app.get("/{house_addr}/HOUSE_NAME")
