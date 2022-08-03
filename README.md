@@ -20,7 +20,7 @@ To initiate the server run in the terminal:
 source ./venv/bin/activate
 export URL_HTTP_PROVIDER="put your url from alchemy, infura or any other provider that you use"
 export ACC_PRIVATE_KEY=PrivateKeyOfTheWalletToPayTransacctions
-uvicorn main:app --reload
+uvicorn main:app --port 8002    #toTesting: --reload    #toProduction: --host 0.0.0.0
 ```
 
-This normally starts `uvicorn` running on `http://127.0.0.1:8000`
+This starts `uvicorn` running on `http://127.0.0.1:8002`
