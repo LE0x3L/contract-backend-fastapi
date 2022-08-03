@@ -18,7 +18,8 @@ To initiate the server run in the terminal:
 
 ```sh
 source ./venv/bin/activate
-export URL_HTTP_PROVIDER="Paste your url from alchemy, infura or any other provider that you use"
+export URL_HTTP_PROVIDER="put your url from alchemy, infura or any other provider that you use"
+export ACC_PRIVATE_KEY=PrivateKeyOfTheWalletToPayTransacctions
 uvicorn main:app --reload
 ```
 
