@@ -35,7 +35,11 @@ CLA = w3.eth.contract( address=adrCLA, abi=abiCLA )
 # fastApi Config
 
 
-app = FastAPI()
+app = FastAPI(
+    title="CLBApi Test",
+    description="Backend API test for CL contracts",
+    version="1.0"
+)
 
 '''
 "*" is for testing purposes only
